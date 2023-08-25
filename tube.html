@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Tube Blog</title>
+</head>
+<body>
+    <h1>My Tube Blog</h1>
+    <img src="television.png" alt="Television">
+    <br><br>
+    <input type="file" id="videoUpload" accept="video/*">
+    <br><br>
+    <label for="videoTitle">Video Title:</label>
+    <input type="text" id="videoTitle">
+    <br><br>
+    <label for="videoDescription">Video Description:</label>
+    <textarea id="videoDescription"></textarea>
+    <br><br>
+    <button id="uploadButton">Upload Video</button>
+    <br><br>
+    <div id="videoList"></div>
+
+    <script>
+        let file;
+        document.getElementById("videoUpload").addEventListener("change", function(event) {
+            file = event.target.files[0];
+        });
+
+        document.getElementById("uploadButton").addEventListener("click", function() {
+            let videoURL = URL.createObjectURL(file);
+            let videoTitle = document.getElementById("videoTitle").value;
+            let videoDescription = document.getElementById("videoDescription").value;
+
+            let videoList = document.getElementById("videoList");
+            let videoItem = document.createElement("div");
+            videoItem.innerHTML = "<h3>" + videoTitle + "</h3><video width='320' height='240' controls><source src='" + videoURL + "'></video><p>" + videoDescription + "</p>";
+            videoList.appendChild(videoItem);
+        });
+    </script>
+</body>
+</html>
